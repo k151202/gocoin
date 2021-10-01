@@ -1,22 +1,38 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
+
+	"github.com/k151202/gocoin/utils"
 )
 
 const port string = ":4000"
 
+type URLDescription struct {
+	URL string
+	Method string
+	Description string
+}
+
+func documentation(rw http.ResponseWriter, r *http.Request){
+	data := []URLDescription{
+		{
+			URL: "/",
+			Method: "GET",
+			Description: "See Documentation",
+		},
+	}
+	b, err := json.Marshal(data)
+	utils.HandlErr(err)
+	fmt.Printf("%s", b)
+}
+
 func main(){
-	// chain := blockchain.GetBlockchain()
-	// chain.AddBlock("Second Block")
-	// chain.AddBlock("Thrid Block")
-	// chain.AddBlock("Fourth Block")
-	// for _, block := range chain.AllBlocks() {
-	// 	fmt.Printf("Data: %s\n", block.Data)
-	// 	fmt.Printf("Hash: %s\n", block.Hash)
-	// 	fmt.Printf("Prev Hash: %s\n", block.PrevHash)
-	// }
+	http.HandleFunc("/", documentation)
 	fmt.Printf("Listening on http://localhost%s\n", port)
-	http.ListenAndServe(port, nil)
+	log.Fatal(http.ListenAndServe(port, nil))
+
 }
