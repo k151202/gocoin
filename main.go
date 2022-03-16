@@ -1,38 +1,10 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-	"log"
-	"net/http"
+import "github.com/k151202/gocoin/cli"
 
-	"github.com/k151202/gocoin/utils"
-)
 
-const port string = ":4000"
-
-type URLDescription struct {
-	URL string
-	Method string
-	Description string
-}
-
-func documentation(rw http.ResponseWriter, r *http.Request){
-	data := []URLDescription{
-		{
-			URL: "/",
-			Method: "GET",
-			Description: "See Documentation",
-		},
-	}
-	b, err := json.Marshal(data)
-	utils.HandlErr(err)
-	fmt.Printf("%s", b)
-}
 
 func main(){
-	http.HandleFunc("/", documentation)
-	fmt.Printf("Listening on http://localhost%s\n", port)
-	log.Fatal(http.ListenAndServe(port, nil))
-
+	cli.Start()
+	
 }

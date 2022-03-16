@@ -3,14 +3,14 @@
 <html lang="en">
   {{template "head" "Add"}}
   <body>
-    {{template "header" "Add a Block"}}
-    <main>
-      <form method="POST">
-        <input type="text" placeholder="Data for your block" required name="blockData"/>
-        <button>Add a Block</button>
-      </form>
-    </main>
-    {{template "footer"}}
+  {{template "header" "Add"}}
+  <main>
+   <form method="POST">
+    <input type="text" placeholder="Data for your block" name="blockData" required />
+    <button>Add Block</button>
+   </form>
+  </main>
+  {{template "footer"}}
   </body>
 </html>
 {{end}}
