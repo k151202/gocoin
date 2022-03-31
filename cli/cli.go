@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"runtime"
 
 	"github.com/k151202/gocoin/explorer"
 	"github.com/k151202/gocoin/rest"
@@ -15,7 +16,8 @@ func usage(){
 	fmt.Printf("-port: Set the PORT of the sever\n")
 	fmt.Printf("-mode: Choose between 'html' and 'rest'\n")
 	fmt.Printf("!! for those want two servers run simultaneously, choose 'both'!!\n")
-	os.Exit(0)
+	// Goexit calls defer before terminating the goroutines
+	runtime.Goexit()
 }
 
 func Start(){
